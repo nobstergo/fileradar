@@ -15,9 +15,12 @@
     "electron": "^36.2.0"
   },
   "build": {
-  "appId": "com.yourname.yourapp",
-  "win": {
-    "target": "nsis"
-  }
+    "appId": "com.yourname.yourapp",
+    "win": {
+      "target": "nsis"
+    }
+  },
+  "devDependencies": {
+    "electron-builder": "^26.0.12"
   }
 }
