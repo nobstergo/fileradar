@@ -11,9 +11,6 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {
-    "electron": "^36.2.0"
-  },
   "build": {
     "appId": "com.yourname.yourapp",
     "win": {
