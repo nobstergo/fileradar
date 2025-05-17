@@ -10,9 +10,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "quickly index files on your system",
   "build": {
     "appId": "com.nobstergo.fileradar",
+    "productName": "File Radar",
+    "files": [
+      "**/*",
+      "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/.*",
+      "!**/*.map"
+    ],
     "win": {
       "target": "nsis"
     }
