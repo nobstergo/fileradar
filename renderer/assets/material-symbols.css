@@ -16,7 +16,9 @@
   display: inline-block;
   white-space: nowrap;
   direction: ltr;
-  -webkit-font-feature-settings: 'liga';
+  -webkit-font-feature-settings: "liga" 1;
+  -moz-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga" 1;
   -webkit-font-smoothing: antialiased;
 }
 .material-symbols-outlined#open_folderbig {
