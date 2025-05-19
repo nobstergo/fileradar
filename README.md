@@ -8,7 +8,7 @@
 
 - 🔍 **Select any folder** to begin scanning
 - 📄 **View a list of all files** with metadata like size and modified date
-- 💬 **Search through file names and contents** — supports multiple languages, symbols, and text inside readable files 
+- 💬 **Search through file names and contents** - supports multiple languages, symbols, and text inside readable files 
 
 ---
 
