@@ -11,12 +11,11 @@ const MAX_HISTORY = 5;
 const selectPlaceholder = document.getElementById("select-folder-placeholder");
 const entriesContainer = document.getElementById("entries-container");
 const openFolderInsideBox = document.getElementById("open-folder-inside-box");
-const mainSelectFolderBtn = document.getElementById("select-folder"); // top main button
+const mainSelectFolderBtn = document.getElementById("select-folder"); 
 
 let files = [];
 let folderPath = '';
 let openMenu = null;
-// Example function to update folder stats
 function enableOptions() {
   document.getElementById("file-filter").disabled = false;
   document.getElementById("search").disabled = false;
@@ -31,16 +30,13 @@ function updateFolderStats(totalFiles, totalSizeBytes) {
     if (bytes === 0) return '0 B';
     const k = 1024;
 
-    // Convert bytes to MB first
     const mb = bytes / (k * k);
 
     if (mb > 1000) {
-      // Show in GB if > 1000 MB
       const gb = bytes / (k * k * k);
       return gb.toFixed(2) + ' GB';
     }
 
-    // Otherwise, use the normal approach with B, KB, MB
     const sizes = ['B', 'KB', 'MB'];
     let i = 0;
     let value = bytes;
@@ -62,7 +58,7 @@ function showFolderPrompt() {
 let isDialogOpen = false;
 
 async function openFolderDialog() {
-  if (isDialogOpen) return; // prevent opening another dialog
+  if (isDialogOpen) return; 
 
   isDialogOpen = true;
 
@@ -74,8 +70,6 @@ async function openFolderDialog() {
   isDialogOpen = false;
 
   if (!result.canceled && result.filePaths.length > 0) {
-    console.log('Selected folder:', result.filePaths[0]);
-    // Do something with the selected folder path
   }
 }
 
@@ -178,7 +172,6 @@ function handleSearchAndFilter() {
   const selectedExt = fileFilter.value;
   const searchContent = searchContentToggle.checked;
 
-  // Convert selected extension(s) to an array
   const selectedExts = selectedExt.split(',');
 
   const filtered = files.filter(file => {
@@ -235,7 +228,6 @@ function renderFiles(fileArray) {
       row.classList.add('hover:bg-gray-100', 'transition', 'rounded-lg');
       row.title = file.path.length > 40 ? file.path : '';
 
-      // Name column
       const nameCell = document.createElement('td');
       nameCell.classList.add('p-2', 'pl-2', 'w-[250px]', 'truncate', 'overflow-hidden', 'whitespace-nowrap', 'cursor-pointer');
       nameCell.title = file.path;
@@ -263,7 +255,6 @@ function renderFiles(fileArray) {
       nameCell.appendChild(nameWrapper);
       row.appendChild(nameCell);
 
-      // Extension column
       const ext = file.name.split('.').pop().toLowerCase();
       const extCell = document.createElement('td');
       extCell.textContent = ext || '';
@@ -280,7 +271,6 @@ function renderFiles(fileArray) {
       extCell.title = typeTitle;
       row.appendChild(extCell);
 
-      // Modified date column
       const modifiedCell = document.createElement('td');
       modifiedCell.classList.add('text-left', 'p-2', 'w-[180px]', 'truncate', 'whitespace-nowrap');
       let lastModifiedStr = 'Unknown';
@@ -296,7 +286,6 @@ function renderFiles(fileArray) {
       modifiedCell.textContent = lastModifiedStr;
       row.appendChild(modifiedCell);
 
-      // Size column
       const sizeCell = document.createElement('td');
       sizeCell.classList.add('text-left', 'p-2', 'w-[100px]', 'truncate', 'font-bold', 'text-gray-600');
       let sizeText = '';
@@ -309,7 +298,6 @@ function renderFiles(fileArray) {
       sizeCell.title = `${file.size} bytes`;
       row.appendChild(sizeCell);
 
-      // Menu column
       const menuCell = document.createElement('td');
       menuCell.classList.add('text-left', 'p-2', 'w-[40px]', 'flex', 'items-center', 'justify-center');
 
@@ -392,7 +380,7 @@ function createMenu(file, anchor) {
 
   let left = rect.left;
   if (rect.left + menuWidth > screenWidth) {
-    left = rect.right - menuWidth; // Shift left relative to icon
+    left = rect.right - menuWidth; 
     if (left < 0) left = 0;
   }
 
@@ -401,7 +389,6 @@ function createMenu(file, anchor) {
 
   document.body.appendChild(menu);
 
-  // Handle outside click
   const handleOutsideClick = (event) => {
     if (!menu.contains(event.target) && !anchor.contains(event.target)) {
       menu.remove();
@@ -443,7 +430,6 @@ function showFileDetails(file) {
   document.body.appendChild(overlay);
 }
 
-// --- Initial Setup --- 
 renderHistory();
 searchInput.addEventListener('input', handleSearchAndFilter);
 fileFilter.addEventListener('change', handleSearchAndFilter);
@@ -452,9 +438,8 @@ searchContentToggle.addEventListener('change', () => {
   handleSearchAndFilter();
 });
 
-// Folder Selection Button
 folderButton.addEventListener('click', async () => {
-  folderPath = await window.api.selectFolder();  // Now it works correctly
+  folderPath = await window.api.selectFolder();  
   if (!folderPath) return;
   toggleSpinner(true);
   setTimeout(async () => {
@@ -468,7 +453,6 @@ folderButton.addEventListener('click', async () => {
   }, 10);
 });
 
-// Reload Folder Button
 reloadButton.addEventListener('click', async () => {
   if (!folderPath) {
     alert('Please select a folder first.');

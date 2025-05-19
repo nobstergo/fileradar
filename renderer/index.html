@@ -11,9 +11,9 @@
   connect-src 'self';
 ">
   <link rel="stylesheet" href="style.css" />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="assets/tailwind.min.css" rel="stylesheet" />
+  <link href="assets/material-symbols.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/all.min.css">
 
 
 </head>
@@ -21,28 +21,22 @@
 
   <div class="flex h-full">
 
-<!-- Sidebar -->
 <aside class="w-70 bg-gray-900 text-white px-4 py-6 pr-6 flex flex-col justify-between">
 
-<!-- App Name/Header -->
 <div class=" flex items-center space-x-2">
   <img src="assets/logo.svg" alt="FileRadar Logo" class="w-12 h-12" />
 <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-3xl font-bold tracking-wide text-white">
   FileRadar
 </h1>
 </div>
-  <!-- Bottom Section: History + Stats -->
   <div class="space-y-4">
-    <!-- History Box -->
     <div id="history-box" class="bg-gray-800 rounded-lg p-4 shadow-md">
       <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">History</h3>
       <ul id="history-list" class="space-y-1 text-sm h-38 max-h-38 overflow-auto">
-        <!-- History items will be appended here -->
         <li class="text-gray-500 italic">Try opening a folder</li>
       </ul>
     </div>
 
-    <!-- Folder Stats Section -->
     <div id="folder-stats" class="bg-gray-800 rounded-lg p-4 shadow-md">
       <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">Search Stats</h3>
       <div class="flex justify-between items-center mb-2">
@@ -57,7 +51,6 @@
   </div>
 </aside>
 
-    <!-- Main content -->
     <main class="flex-1 p-6 flex flex-col ">
       <div class="flex items-center space-x-4 mb-4">
   <button id="select-folder" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center space-x-2">
@@ -104,17 +97,13 @@
         </div>
       </div>
 
-      <!-- Results -->
       <div id="fileList" class="bg-white rounded shadow p-4 flex-1 transition-all duration-200 overflow-x-auto mt-4 relative">
         <div id="select-folder-placeholder"
             class="flex flex-col items-center justify-center h-full border-4 border-dashed border-gray-400 rounded-2xl cursor-pointer transition hover:border-blue-500 hover:bg-blue-50 hover:shadow-lg">
-          <div class="text-6xl text-gray-400 opacity-60 mb-3">
-            <i class="fas fa-folder-open"></i>
-          </div>
+            <span id="open_folderbig" class="material-symbols-outlined text-6xl text-gray-400 opacity-60 mb-3">folder_open</span>
           <p class="text-gray-500 font-medium">Click to select a folder</p>
         </div>
         <div id="entries-container" class="space-y-2 hidden">
-          <!-- Entries will be inserted here by JS -->
         </div>
       </div>
     </main>

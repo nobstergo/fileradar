@@ -21,10 +21,12 @@
       "!**/*.map"
     ],
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "renderer/assets/icon.png"
     }
   },
   "devDependencies": {
+    "electron": "^36.2.1",
     "electron-builder": "^26.0.12"
   }
 }

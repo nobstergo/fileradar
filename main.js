@@ -9,19 +9,22 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1000,
     height: 700,
+    icon: path.join(__dirname, 'renderer', 'assets', 'icon-32x32.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: false,  // Make sure this is false for security reasons
-      contextIsolation: true,  // This should be true for security
+      nodeIntegration: false,  
+      contextIsolation: true,  
     },
   });
 
   win.loadFile('renderer/index.html');
+  win.setMenu(null);
+  win.setMenuBarVisibility(false);
+  win.setAutoHideMenuBar(true);
 }
 
-// IPC Listener for opening a file
 ipcMain.handle('open-file', (event, filePath) => {
-  if (!userSelectedFolder) return; // no folder selected
+  if (!userSelectedFolder) return;  
 
   if (!isPathInsideFolder(filePath, userSelectedFolder) && filePath !== userSelectedFolder) {
     console.warn(`Open file request outside selected folder denied: ${filePath}`);
@@ -68,21 +71,29 @@ ipcMain.handle('select-folder', async () => {
   return userSelectedFolder;
 });
 
-const MAX_SIZE = 5 * 1024 * 1024; // 5 MB
+const MAX_SIZE = 5 * 1024 * 1024; 
 
 const isPathInsideFolder = (filePath, folderPath) => {
-  const relative = path.relative(folderPath, filePath);
-  // If relative starts with .. or is absolute, it is outside
-  return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
+  try {
+    const realFilePath = fs.realpathSync(filePath);
+    const realFolderPath = fs.realpathSync(folderPath);
+    const relative = path.relative(realFolderPath, realFilePath);
+    return (
+      relative === '' ||
+      (!relative.startsWith('..') && !path.isAbsolute(relative))
+    );
+  } catch {
+    return false; 
+  }
 };
 
 
 ipcMain.handle('scan-folder', async (event, folderPath) => {
-    if (!userSelectedFolder) return []; // No folder selected yet
+    if (!userSelectedFolder) return []; 
 
   if (!isPathInsideFolder(folderPath, userSelectedFolder) && folderPath !== userSelectedFolder) {
     console.warn(`Scan request outside selected folder denied: ${folderPath}`);
-    return []; // Deny scanning outside user-selected folder
+    return []; 
   }
 
     const files = [];
@@ -98,15 +109,12 @@ ipcMain.handle('scan-folder', async (event, folderPath) => {
       const fullPath = path.join(folderPath, item);
       const stat = fs.statSync(fullPath);
   
-      // Scan only text-based files (you can expand this)
       if (stat.isFile()) {
         let content = '';
         if (stat.size < MAX_SIZE) {
             try {
-                // Try to read as UTF-8 text (binary files may error or show garbage)
                 content = fs.readFileSync(fullPath, 'utf-8');
               } catch (e) {
-                // If it's a binary or unreadable file, just skip content
                 content = '[Non-text or unreadable file]';
               }      
         } else {
