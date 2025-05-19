@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "electron-builder --win"
   },
   "keywords": [],
   "author": "",
@@ -22,7 +22,13 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "renderer/assets/icon.png"
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true
     }
   },
   "devDependencies": {
