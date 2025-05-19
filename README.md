@@ -1,6 +1,6 @@
-# File Radar
+# FileRadar
 
-**File Radar** is a desktop application that helps you **browse, search, and index files** inside any selected folder - with support for multiple languages, symbols, and file content searching.
+**FileRadar** is a desktop application that helps you **browse, search, and index files** inside any selected folder - with support for multiple languages, symbols, and file content searching.
 
 ---
 
