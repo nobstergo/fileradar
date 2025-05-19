@@ -1,5 +1,5 @@
 {
-  "name": "file-radar",
+  "name": "fileradar",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "description": "quickly index files on your system",
   "build": {
     "appId": "com.nobstergo.fileradar",
-    "productName": "File Radar",
+    "productName": "FileRadar",
     "files": [
       "**/*",
       "!node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
